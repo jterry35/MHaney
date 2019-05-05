@@ -14,8 +14,8 @@ using namespace std;
 ifstream infile; //input file to hold read data
 ofstream outfile; //output file to hold write data
 
-const int ROWS = 30, //to hold number of rows
-COLS = 2; //to hold number columns
+const int ROWS = 35, //to hold number of rows
+COLS = 2; // index 0 number pieces, index 1 batches
 
 //prototype to zero out the array
 void zeroTheArray(int[][COLS]);
@@ -57,7 +57,6 @@ int main()
 		return 0;
 	}
 
-	int perLine = 0; //to hold number of data printed per line
 	int bump = 0; //var to print out specific number of data per line
 	int chocData[ROWS][COLS]; //2D array to hold chocolate data
 
@@ -69,23 +68,32 @@ int main()
 	while (!infile.eof())
 	{
 		cout << setw(4);
-		infile >> chocData[idNum][chocPieces]; //read in data from file
-		cout << chocData[idNum][chocPieces] << " "; //verify data has been read in properly
+
+		int x, y;
+		infile >> x >> y;
+
+		chocData[x][0] += y;
+		chocData[x][1]++;
+
+		//infile >> chocData[idNum][chocPieces]; //read in data from file
+		//cout << chocData[idNum][chocPieces] << " "; //verify data has been read in properly
 
 		if ((bump + 1) % 2 == 0) //to print 2 pieces of data per line
 			cout << endl;
 		bump++; //to increment the bump
 	}
 
-	/* *****While attempting to just print the array here, it prints the last
-	piece of data with trailing zero's.
-	for(int x = 0; x < ROWS; x++)
-		for(int y = 0; y < COLS; y++)
+	// *****While attempting to just print the array here, it prints the last
+	//piece of data with trailing zero's.
+	for (int x = 0; x < ROWS; x++)
+	{
+		for (int y = 0; y < COLS; y++)
 		{
-			cout << chocData[idNum++][chocPieces++] << " ";
-		} */
+			cout << chocData[x][y] << " ";
+		}
+	}
 
-		//to close files and flush buffers
+	//to close files and flush buffers
 	infile.close();
 	outfile.close();
 
