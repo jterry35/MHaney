@@ -10,25 +10,42 @@ namespace ArrayCounter
     {
         static void Main(string[] args)
         {
-            int[] ary = new int[] { 3, 4, 5, 6, 7, 8, 9, 10, 11, 3, 7 };
-            int[] countAry = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            int[] ary = new int[] { 3, 4, 3, 7, 3, 6, 7 };
+
+            // this is manually performing the acumulation without using a for loop
+            int[] acumAryManual = new int[10];
+
+            acumAryManual[3]++;
+            acumAryManual[4]++;
+            acumAryManual[3]++;
+            acumAryManual[7]++;
+            acumAryManual[3]++;
+            acumAryManual[6]++;
+            acumAryManual[7]++;
+
+            PrintArray(acumAryManual);
+
+            // this is using a for loop
+            int[] acumAryLoop = new int[10];
 
             for (int i = 0; i < ary.Length; i++)
             {
                 int curVal = ary[i];
-                countAry[curVal]++;
+                acumAryLoop[curVal]++;
             }
 
-            PrintArray(countAry);
+            Console.WriteLine("--------------");
+
+            PrintArray(acumAryLoop);
 
             Console.ReadKey();
         }
 
-        static void PrintArray(int[] ary)
+        static void PrintArray(int[] abcarray)
         {
-            for (int i = 0; i < ary.Length; i++)
+            for (int i = 0; i < abcarray.Length; i++)
             {
-                Console.WriteLine(i + " - " + ary[i]);
+                Console.WriteLine(i + " - " + abcarray[i]);
             }
         }
     }
